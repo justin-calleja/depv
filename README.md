@@ -1,3 +1,5 @@
+This repo contains the example code used in the blog post: [Functional Programming in Javascript - an example](https://medium.com/@calleja.justin/functional-programming-in-javascript-an-example-47116c2c3d00#.pr80xj1pg).
+
 Install globally with:
 
 ```
@@ -10,4 +12,3 @@ Run in a directory containing a package.json file (or one in which a parent dir 
 $ depv
 ```
 
-Note: `node_modules` must be installed for it to work. Error handling is not implemented. This is just example code for a yet to be published blog post.
