@@ -1,6 +1,6 @@
 {
   "name": "@justinc/depv",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "example code for blog post",
   "main": "src/index.js",
   "bin": "cli.js",
