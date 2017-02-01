@@ -6,17 +6,16 @@ const { resolve, join } = require('path');
 
 // readPkgUpResultF :: Future Error Object
 // The resolved Object is of the form: { pkg, path }
-const readPkgUpResultF = Future.cache(
-  Future((rej, res) => readPkgUpAsPromised().then(res).catch(rej))
-);
+const readPkgUpResultF = Future((rej, res) => readPkgUpAsPromised().then(res).catch(rej))
+const cachedReadPkgUpResultF = Future.cache(readPkgUpResultF);
 
 // readPkg :: String -> Future Error Object
 const readPkg = path => Future((rej, res) => readPkgAsPromised(path).then(res).catch(rej));
 
 // pkgJSONF :: Future Error Object
-const pkgJSONF = readPkgUpResultF.map(({ pkg }) => pkg);
+const pkgJSONF = cachedReadPkgUpResultF.map(({ pkg }) => pkg);
 // pathF :: Future Error String
-const pathF = readPkgUpResultF.map(({ path }) => path);
+const pathF = cachedReadPkgUpResultF.map(({ path }) => path);
 
 // depSemverRangeDictF :: Fututre Error Object
 const depSemverRangeDictF = pkgJSONF.map(pkgJSON => pkgJSON.dependencies);
@@ -58,6 +57,7 @@ const depsColumnifyDataF = lift((depNames, depSemverRangeDict, depVersionDict) =
 
 module.exports = {
   readPkgUpResultF,
+  cachedReadPkgUpResultF,
   readPkg,
   pkgJSONF,
   pathF,
